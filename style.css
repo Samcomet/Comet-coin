@@ -1,0 +1,116 @@
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .coin {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        #balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        #reward {
+            font-size: 18px;
+            color: green;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        #reward.show {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+        
+        #tap-button {
+            background-color: gold;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #tap-button:hover {
+            background-color: Red;
+        }
+        
+        #tap-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .fas {
+            font-size: 24px;
+        }
+        
+        #timer {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+       * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar {
+      position: fixed;
+      bottom: 0px; /* sticks the side nav to the top */
+      left: 0px; /* sticks the side nav to the left side */
+      width: 100%;
+    }
+    .nav-bar a {
+      text-decoration: none;
+      color: black;
+      display: block;
+    }
+    .nav-bar > ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar > ul > li > a {
+      padding: 20px;
+      background: lightgrey;
+    }
+    .nav-bar > ul > li > a:hover {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar .active {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar li {
+      float: left;
+      width: 25%; /* 100% / 4 (number of li elements) = 25% */
+      text-align: center;
+      border-right: 1px solid #333; /* for the borders */
+    }
+    .nav-bar li:last-child {
+      border: none;
+    }
