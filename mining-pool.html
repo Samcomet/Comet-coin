@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Pool</title>
+    <style>
+        * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar {
+      position: fixed;
+      bottom: 0px; /* sticks the side nav to the top */
+      left: 0px; /* sticks the side nav to the left side */
+      width: 100%;
+      padding:8vh;
+    }
+    .nav-bar a {
+      text-decoration: none;
+      color: black;
+      display: block;
+    }
+    .nav-bar > ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar > ul > li > a {
+      padding: 10px;
+      background: lightgrey;
+    }
+    .nav-bar > ul > li > a:hover {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar .active {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar li {
+      float: left;
+      width: 25%; /* 100% / 4 (number of li elements) = 25% */
+      text-align: center;
+      border-right: 1px solid #333; /* for the borders */
+    }
+    .nav-bar li:last-child {
+      border: none;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mining-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .mining-console {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        
+        .mining-console pre {
+            white-space: pre-wrap;
+        }
+        
+        .alert {
+            background-color: #ff9900;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mining Pool</h1>
+        <div class="mining-stats">
+            <p>Hashrate: <span id="hashrate">0 MH/s</span></p>
+            <p>Blocks Mined: <span id="blocks">0</span></p>
+            <p>Balance: <span id="balance">0 NCT</span></p>
+            <p>Reservoir: <span id="reservoir">0%</span></p>
+        </div>
+        <div class="mining-console">
+            <pre id="console"></pre>
+        </div>
+        <div class="alert" id="alert">
+            Reservoir is full! Please empty it to continue mining.
+        </div>
+        <button id="empty-reservoir" style="display: none;">Empty Reservoir</button>
+    </div>
+<div class="nav-bar">
+    <ul>
+      <li><a href="index.html"> Home </a></li>
+      <li><a href="dashboard.html"> Dashboard </a></li>
+      <li><a href="wallet.html"> Wallet </a></li>
+      <li><a href="mining-pool.html" class="active"> Mining </a></li>
+    </ul>
+  </div>
+    <script>
+        
+// Mock mining data
+let hashrate = 0;
+let blocks = 0;
+let balance = 0;
+let reservoir = 0;
+let startTime = new Date().getTime();
+let expired = false;
+let mining = true;
+
+// Load saved data
+if (localStorage.getItem('miningData')) {
+    const savedData = JSON.parse(localStorage.getItem('miningData'));
+    hashrate = savedData.hashrate;
+    blocks = savedData.blocks;
+    balance = savedData.balance;
+    reservoir = savedData.reservoir;
+    startTime = savedData.startTime;
+}
+
+// Update mining stats
+setInterval(() => {
+    if (expired || !mining) return;
+    hashrate += Math.random() * 10;
+    blocks += Math.random() * 0.1;
+    balance += Math.random() * 0.01;
+    reservoir += Math.random() * 10;
+    document.getElementById('hashrate').textContent = `${hashrate.toFixed(2)} MH/s`;
+    document.getElementById('blocks').textContent = `${blocks.toFixed(2)}`;
+    document.getElementById('balance').textContent = `${balance.toFixed(8)} NCT`;
+    document.getElementById('reservoir').textContent = `${reservoir.toFixed(2)}%`;
+    if (reservoir >= 100) {
+        mining = false;
+        document.getElementById('alert').style.display = 'block';
+        document.getElementById('empty-reservoir').style.display = 'block';
+    }
+    if (new Date().getTime() - startTime >= 3600000) {
+        expired = true;
+        alert('Mining session expired!');
+    }
+    // Save data
+    localStorage.setItem('miningData', JSON.stringify({
+        hashrate,
+        blocks,
+        balance,
+        reservoir,
+        startTime
+    }));
+}, 1000);
+
+// Simulate mining console output
+setInterval(() => {
+    if (expired || !mining) return;
+    const console = document.getElementById('console');
+    console.textContent += `Mining block ${blocks.toFixed(2)}... \n`;
+    console.scrollTop = console.scrollHeight;
+}, 2000);
+
+// Empty reservoir
+document.getElementById('empty-reservoir').addEventListener('click', () => {
+    reservoir = 0;
+    mining = true;
+    document.getElementById('reservoir').textContent = `${reservoir.toFixed(2)}%`;
+    document.getElementById('alert').style.display = 'none';
+    document.getElementById('empty-reservoir').style.display = 'none';
+    // Save data
+    localStorage.setItem('miningData', JSON.stringify({
+        hashrate,
+        blocks,
+        balance,
+        reservoir,
+        startTime
+    }));
+});
+
+// Clear data on expiration
+setInterval(() => {
+    if (expired) {
+        localStorage.removeItem('miningData');
+    }
+}, 3600000);
+        </script>
+    </body>
+</html
