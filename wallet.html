@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet</title>
+    <link rel="stylesheet" href="(link unavailable)" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wallet-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        
+        .wallet-balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .wallet-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .stat {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 10px;
+            width: 30%;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .coming-soon {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 36px;
+            color: #666;
+        }
+        * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar a {
+      text-decoration: none;
+      color: black;
+      display: block;
+    }
+    .nav-bar > ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar > ul > li > a {
+      padding: 10px;
+      background: lightgrey;
+    }
+    .nav-bar > ul > li > a:hover {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar .active {
+      background: #173459;
+      color: #f8f9f9;
+    }
+    .nav-bar li {
+      float: left;
+      width: 25%; /* 100% / 4 (number of li elements) = 25% */
+      text-align: center;
+      border-right: 1px solid #333; /* for the borders */
+    }
+    .nav-bar li:last-child {
+      border: none;
+    }
+    .nav-bar {
+      position: fixed;
+      bottom: 0px; /* sticks the side nav to the top */
+      left: 0px; /* sticks the side nav to the left side */
+      width: 100%;
+      padding:8vh;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wallet-header">
+            <h1>Wallet</h1>
+        </div>
+        <div class="wallet-balance">
+            $0.00 
+        </div>
+        <div class="wallet-stats">
+            <div class="stat">
+                <p>Total Balance</p>
+                <p class="stat-value">$0.00</p>
+            </div>
+            <div class="stat">
+                <p>Available Balance</p>
+                <p class="stat-value">$0.00</p>
+            </div>
+            <div class="stat">
+                <p>Pending Transactions</p>
+                <p class="stat-value">0</p>
+            </div>
+        </div>
+        <div class="coming-soon">
+            Coming Soon...
+            <br>
+            Our wallet feature is currently under development.
+            <br>
+            Stay tuned for updates!
+        </div>
+    </div>
+    <div class="nav-bar">
+    <ul>
+      <li><a href="index.html"> Home </a></li>
+      <li><a href="dashboard.html"> Dashboard </a></li>
+      <li><a href="wallet.html" class="active"> Wallet </a></li>
+      <li><a href="mining-pool.html"> Mining</a></li>
+    </ul>
+  </div>
+</body>
+</html>
